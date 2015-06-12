@@ -1,6 +1,6 @@
 {
 	"name": "sense-forage",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "An Online Platform which Aims to Support Artists World Wide",
 	"dependencies": {
 		"bootstrap": "~3",
