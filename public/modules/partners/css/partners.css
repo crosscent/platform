@@ -1,0 +1,66 @@
+.vcenter {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.partner-edit input, .partner-edit textarea{
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  text-align: center;
+  resize: none;
+}
+
+.partner-edit .logo {
+  height: 10em;
+  background-color: #e3e3e3;
+  display: block;
+  margin: 0 auto 0.5em auto;
+}
+
+.partner-edit .storename {
+  font-size: 4em;
+  font-weight:700;
+  height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.partner-edit .slogan {
+  font-size: 2em;
+  font-style: italic;
+  height: 1.5em;
+}
+
+.partner-edit .header {
+  height: 15em;
+  min-width: 100%;
+  font-size: 2em;
+  text-align: center;
+}
+.partner-edit .header a{
+  color: black;
+}
+.partner-edit .special {
+  font-size: 2em;
+  font-weight: 700;
+  color: #5d5d5d;
+  text-transform: uppercase;
+}
+.partner-edit .spec-icon {
+  font-size: 5em;
+  text-align: center;
+  display: block;
+}
+.partner-edit .spec-title{
+  font-size: 2em;
+  color: #5d5d5d;
+  height: 1.5em;
+}
+.partner-edit .spec-descript{
+  font-size: 1em;
+  color: #5d5d5d;
+  height: 10em;
+  text-align: center;
+}

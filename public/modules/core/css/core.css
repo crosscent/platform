@@ -3,10 +3,9 @@ html{
 }
 body{
 	font-family: 'Gentium Book Basic', serif;
+	font-size: 100%;
 }
 
-.content {
-}
 .undecorated-link:hover {
 	text-decoration: none;
 }
@@ -44,11 +43,8 @@ body{
 }
 .navbar-nav > li > a {
 	color: #5c5c5c;
-	padding-left: 3em;
-	padding-right: 3em;
+	padding: 2em 3em 0 2em;
 	text-align: center;
-	padding-top: 35px;
-	padding-bottom: 0px;
 }
 
 .nav > li > a:hover,
@@ -103,16 +99,14 @@ body{
 		max-height: 500px;
 	}
 	.hand-picked {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 1em 0 1em 0;
 		height: 300px;
 	}
 	.newcollection{
 		max-height: 75px;
 	}
 	.navbar-nav > li > a {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 1em 0 1em 0;
 	}
 }
 
@@ -186,14 +180,14 @@ body{
 
 .subscription {
 	background-color: #efeeee;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .subscription .lead {
 	font-size: 2em;
 }
 
-#mc_embed_signup_scroll > .mc-field-group > .email {
+.mc-field-group > .email {
 	border: none;
 	background: white;
 	height: 40px;
