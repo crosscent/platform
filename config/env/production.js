@@ -9,7 +9,7 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
 			],
 			js: [
-				'public/lib/angular/angular.js',
+				'public/lib/angular/angular.min.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-cookies/angular-cookies.js',
 				'public/lib/angular-animate/angular-animate.js',
@@ -21,7 +21,12 @@ module.exports = {
 			]
 		},
 		css: 'public/dist/application.min.css',
-		js: 'public/dist/application.min.js'
+		js: [
+			'public/config.js',
+			'public/application.js',
+			'public/modules/*/*.js',
+			'public/modules/*/*[!tests]*/*.js'
+		]
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
