@@ -1,0 +1,22 @@
+.product-edit input, .product-edit textarea{
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  text-align: center;
+  resize: none;
+}
+.product-edit .name {
+  width: 100%;
+}
+.product-edit .header{
+  height: 15em;
+  min-width: 100%;
+  font-size: 2em;
+  text-align: center;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

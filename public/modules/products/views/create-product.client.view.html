@@ -1,9 +1,9 @@
-<section data-ng-controller="ProductsController">
+<section data-ng-controller="ProductsCreateController as ProductsCreateCtrl">
     <div class="page-header">
         <h1>New Product</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="ProductsCreateCtrl.create()" novalidate>
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
