@@ -8,7 +8,8 @@ module.exports = function(app) {
 	app.route('/partners')
 		.get(partners.list)
 		.post(users.requiresLogin, partners.create);
-
+	app.route('/partners/:partnerId/edit')
+		.get(users.requiresLogin, partners.read);
 	app.route('/partners/:partnerId')
 		.get(partners.read)
 		.put(users.requiresLogin, partners.hasAuthorization, partners.update)

@@ -13,9 +13,7 @@ partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authent
 		this.partners = Partners.query();
 
 
-	  this.toggleAnimation = function () {
-	    $scope.animationsEnabled = !$scope.animationsEnabled;
-	  };
+
 
 
 	}
@@ -93,6 +91,11 @@ partnersApp.controller('PartnersEditController', ['$scope', '$stateParams', 'Par
 	      $log.info('Modal dismissed at: ' + new Date());
 	    });
 	  };
+
+		this.toggleAnimation = function () {
+			$scope.animationsEnabled = !$scope.animationsEnabled;
+		};
+		
 		// Update existing Partner
 		this.update = function(updatedCustomer) {
 			var partner = updatedCustomer;
