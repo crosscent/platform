@@ -43,6 +43,11 @@ angular.element(document).ready(function() {
 });
 'use strict';
 
+// Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('admin');
+
+'use strict';
+
 // Use applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('categories');
 'use strict';
@@ -61,6 +66,38 @@ ApplicationConfiguration.registerModule('products');
 
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
+'use strict';
+
+// Configuring the Articles module
+angular.module('admin').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('admin', 'Admin', 'admin', 'dropdown', '/');
+		Menus.addSubMenuItem('admin', 'admin', 'User Control', 'products');
+	}
+]);
+
+'use strict';
+
+//Setting up route
+angular.module('admin').config(['$stateProvider',
+	function($stateProvider) {
+		// Admin state routing
+		$stateProvider.
+		state('admin', {
+			url: '/admin',
+			templateUrl: 'modules/admin/views/admin.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+angular.module('admin').controller('AdminController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
 'use strict';
 
 // Configuring the Articles module
@@ -260,6 +297,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
+		$scope.adminMenu = Menus.getMenu('admin');
 
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
@@ -271,6 +309,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		});
 	}
 ]);
+
 'use strict';
 
 
@@ -298,7 +337,7 @@ angular.module('core').service('Menus', [
 		// Define the menus object
 		this.menus = {};
 
-		// A private function for rendering decision 
+		// A private function for rendering decision
 		var shouldRender = function(user) {
 			if (user) {
 				if (!!~this.roles.indexOf('*')) {
@@ -449,9 +488,11 @@ angular.module('core').service('Menus', [
 		};
 
 		//Adding the topbar menu
-		this.addMenu('topbar');
+		this.addMenu('topbar', true);
+		this.addMenu('admin', false, ['admin']);
 	}
 ]);
+
 'use strict';
 
 // Configuring the Articles module
@@ -695,6 +736,7 @@ angular.module('products').run(['Menus',
 		Menus.addSubMenuItem('topbar', 'products', 'New Product', 'products/create');
 	}
 ]);
+
 'use strict';
 
 //Setting up route
