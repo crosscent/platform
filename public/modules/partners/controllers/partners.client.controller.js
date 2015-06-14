@@ -178,7 +178,8 @@ partnersApp.controller('PartnersEditController', ['$scope', '$stateParams', 'Par
 		// 	});
 		// };
 
-angular.module('ui.bootstrap.demo').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+angular.module('ui.bootstrap.demo').controller('ModalDemoCtrl', ['$scope', '$modal', '$log',
+	function ($scope, $modal, $log) {
 
   $scope.items = ['item1', 'item2', 'item3'];
 
@@ -209,12 +210,14 @@ angular.module('ui.bootstrap.demo').controller('ModalDemoCtrl', function ($scope
     $scope.animationsEnabled = !$scope.animationsEnabled;
   };
 
-});
+}
+]);
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items',
+	function ($scope, $modalInstance, items) {
 
   $scope.items = items;
   $scope.selected = {
@@ -228,4 +231,5 @@ angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($s
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-});
+}
+]);
