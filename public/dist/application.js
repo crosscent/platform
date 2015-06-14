@@ -55,6 +55,10 @@ ApplicationConfiguration.registerModule('core');
 ApplicationConfiguration.registerModule('partners');
 'use strict';
 
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('products');
+'use strict';
+
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
 'use strict';
@@ -95,16 +99,36 @@ angular.module('categories').config(['$stateProvider',
 ]);
 'use strict';
 
+var categoriesApp = angular.module('categories');
+
 // Categories controller
-angular.module('categories').controller('CategoriesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Categories',
-	function($scope, $stateParams, $location, Authentication, Categories) {
-		$scope.authentication = Authentication;
+categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Categories',
+	function($scope, $stateParams, Authentication, Categories){
+
+		this.authentication = Authentication;
+
+		// Find a list of Categories
+
+		this.categories = Categories.query();
+
+		// Find existing Category
+		this.findOne = function() {
+			$scope.category = Categories.get({
+				categoryId: $stateParams.categoryId
+			});
+		};
+	}
+]);
+
+categoriesApp.controller('CategoriesCreateController', ['$scope', '$location', 'Authentication', 'Categories',
+	function($scope, $location, Authentication, Categories){
+		this.authentication = Authentication;
 
 		// Create new Category
-		$scope.create = function() {
+		this.create = function() {
 			// Create new Category object
 			var category = new Categories ({
-				name: this.name
+				name: $scope.name
 			});
 
 			// Redirect after save
@@ -117,35 +141,11 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$sta
 				$scope.error = errorResponse.data.message;
 			});
 		};
+	}
+]);
 
-		// Remove existing Category
-		$scope.remove = function(category) {
-			if ( category ) { 
-				category.$remove();
-
-				for (var i in $scope.categories) {
-					if ($scope.categories [i] === category) {
-						$scope.categories.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.category.$remove(function() {
-					$location.path('categories');
-				});
-			}
-		};
-
-		// Update existing Category
-		$scope.update = function() {
-			var category = $scope.category;
-
-			category.$update(function() {
-				$location.path('categories/' + category._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
-
+categoriesApp.controller('CategoriesEditController', ['$scope', '$stateParams', 'Categories',
+	function($scope, $stateParams, Categories){
 		// Find a list of Categories
 		$scope.find = function() {
 			$scope.categories = Categories.query();
@@ -153,12 +153,77 @@ angular.module('categories').controller('CategoriesController', ['$scope', '$sta
 
 		// Find existing Category
 		$scope.findOne = function() {
-			$scope.category = Categories.get({ 
+			$scope.category = Categories.get({
 				categoryId: $stateParams.categoryId
 			});
 		};
 	}
 ]);
+
+// angular.module('categories').controller('CategoriesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Categories',
+// 	function($scope, $stateParams, $location, Authentication, Categories) {
+// 		$scope.authentication = Authentication;
+//
+// 		// Create new Category
+// 		$scope.create = function() {
+// 			// Create new Category object
+// 			var category = new Categories ({
+// 				name: this.name
+// 			});
+//
+// 			// Redirect after save
+// 			category.$save(function(response) {
+// 				$location.path('categories/' + response._id);
+//
+// 				// Clear form fields
+// 				$scope.name = '';
+// 			}, function(errorResponse) {
+// 				$scope.error = errorResponse.data.message;
+// 			});
+// 		};
+//
+// 		// Remove existing Category
+// 		$scope.remove = function(category) {
+// 			if ( category ) {
+// 				category.$remove();
+//
+// 				for (var i in $scope.categories) {
+// 					if ($scope.categories [i] === category) {
+// 						$scope.categories.splice(i, 1);
+// 					}
+// 				}
+// 			} else {
+// 				$scope.category.$remove(function() {
+// 					$location.path('categories');
+// 				});
+// 			}
+// 		};
+//
+// 		// Update existing Category
+// 		$scope.update = function() {
+// 			var category = $scope.category;
+//
+// 			category.$update(function() {
+// 				$location.path('categories/' + category._id);
+// 			}, function(errorResponse) {
+// 				$scope.error = errorResponse.data.message;
+// 			});
+// 		};
+//
+// 		// Find a list of Categories
+// 		$scope.find = function() {
+// 			$scope.categories = Categories.query();
+// 		};
+//
+// 		// Find existing Category
+// 		$scope.findOne = function() {
+// 			$scope.category = Categories.get({
+// 				categoryId: $stateParams.categoryId
+// 			});
+// 		};
+// 	}
+// ]);
+
 'use strict';
 
 //Categories service used to communicate Categories REST endpoints
@@ -438,9 +503,7 @@ partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authent
 		this.partners = Partners.query();
 
 
-	  this.toggleAnimation = function () {
-	    $scope.animationsEnabled = !$scope.animationsEnabled;
-	  };
+
 
 
 	}
@@ -518,6 +581,11 @@ partnersApp.controller('PartnersEditController', ['$scope', '$stateParams', 'Par
 	      $log.info('Modal dismissed at: ' + new Date());
 	    });
 	  };
+
+		this.toggleAnimation = function () {
+			$scope.animationsEnabled = !$scope.animationsEnabled;
+		};
+		
 		// Update existing Partner
 		this.update = function(updatedCustomer) {
 			var partner = updatedCustomer;
@@ -609,6 +677,121 @@ partnersApp.controller('PartnersEditController', ['$scope', '$stateParams', 'Par
 angular.module('partners').factory('Partners', ['$resource',
 	function($resource) {
 		return $resource('partners/:partnerId', { partnerId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
+'use strict';
+
+// Configuring the Articles module
+angular.module('products').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Products', 'products', 'dropdown', '/products(/create)?');
+		Menus.addSubMenuItem('topbar', 'products', 'List Products', 'products');
+		Menus.addSubMenuItem('topbar', 'products', 'New Product', 'products/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('products').config(['$stateProvider',
+	function($stateProvider) {
+		// Products state routing
+		$stateProvider.
+		state('listProducts', {
+			url: '/products',
+			templateUrl: 'modules/products/views/list-products.client.view.html'
+		}).
+		state('createProduct', {
+			url: '/products/create',
+			templateUrl: 'modules/products/views/create-product.client.view.html'
+		}).
+		state('viewProduct', {
+			url: '/products/:productId',
+			templateUrl: 'modules/products/views/view-product.client.view.html'
+		}).
+		state('editProduct', {
+			url: '/products/:productId/edit',
+			templateUrl: 'modules/products/views/edit-product.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Products controller
+angular.module('products').controller('ProductsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Products',
+	function($scope, $stateParams, $location, Authentication, Products) {
+		$scope.authentication = Authentication;
+
+		// Create new Product
+		$scope.create = function() {
+			// Create new Product object
+			var product = new Products ({
+				name: this.name
+			});
+
+			// Redirect after save
+			product.$save(function(response) {
+				$location.path('products/' + response._id);
+
+				// Clear form fields
+				$scope.name = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Remove existing Product
+		$scope.remove = function(product) {
+			if ( product ) { 
+				product.$remove();
+
+				for (var i in $scope.products) {
+					if ($scope.products [i] === product) {
+						$scope.products.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.product.$remove(function() {
+					$location.path('products');
+				});
+			}
+		};
+
+		// Update existing Product
+		$scope.update = function() {
+			var product = $scope.product;
+
+			product.$update(function() {
+				$location.path('products/' + product._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Products
+		$scope.find = function() {
+			$scope.products = Products.query();
+		};
+
+		// Find existing Product
+		$scope.findOne = function() {
+			$scope.product = Products.get({ 
+				productId: $stateParams.productId
+			});
+		};
+	}
+]);
+'use strict';
+
+//Products service used to communicate Products REST endpoints
+angular.module('products').factory('Products', ['$resource',
+	function($resource) {
+		return $resource('products/:productId', { productId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'
