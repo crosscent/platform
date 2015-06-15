@@ -73,7 +73,7 @@ angular.module('admin').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('admin', 'Admin', 'admin', 'dropdown', '/');
-		Menus.addSubMenuItem('admin', 'admin', 'User Control', 'products');
+		Menus.addSubMenuItem('admin', 'admin', 'User Control', 'admin/usercontrol');
 	}
 ]);
 
@@ -84,20 +84,41 @@ angular.module('admin').config(['$stateProvider',
 	function($stateProvider) {
 		// Admin state routing
 		$stateProvider.
-		state('admin', {
-			url: '/admin',
-			templateUrl: 'modules/admin/views/admin.client.view.html'
+		state('admin-usercontrol', {
+			url: '/admin/usercontrol',
+			templateUrl: 'modules/admin/views/user-list.client.view.html'
 		});
 	}
 ]);
+
 'use strict';
 
-angular.module('admin').controller('AdminController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
+var adminApp = angular.module('admin');
+
+// Users Controller
+
+adminApp.controller('UserController', ['$scope', '$http', '$location', 'Authentication', 'UsersAdmin',
+	function($scope, $http, $location, Authentication, UsersAdmin) {
+		$scope.authentication = Authentication;
+
+		this.users = UsersAdmin.query();
 	}
 ]);
+
+'use strict';
+
+//Admin service used to communicate users REST endpoints
+angular.module('admin').factory('UsersAdmin', ['$resource',
+	function($resource) {
+		return $resource('admin/usercontrol/:userId', { userId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
+
 'use strict';
 
 // Configuring the Articles module
@@ -985,6 +1006,7 @@ angular.module('users').config(['$stateProvider',
 		});
 	}
 ]);
+
 'use strict';
 
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
