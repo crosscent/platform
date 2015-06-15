@@ -84,9 +84,13 @@ angular.module('admin').config(['$stateProvider',
 	function($stateProvider) {
 		// Admin state routing
 		$stateProvider.
-		state('admin-usercontrol', {
+		state('admin-usercontrol-list', {
 			url: '/admin/usercontrol',
 			templateUrl: 'modules/admin/views/user-list.client.view.html'
+		}).
+		state('admin-usercontrol-edit', {
+			url: '/admin/usercontrol/:userId/edit',
+			templateUrl: 'modules/admin/views/user-edit.client.view.html'
 		});
 	}
 ]);
@@ -102,6 +106,28 @@ adminApp.controller('UserController', ['$scope', '$http', '$location', 'Authenti
 		$scope.authentication = Authentication;
 
 		this.users = UsersAdmin.query();
+	}
+]);
+
+adminApp.controller('UserEditController', ['$scope', '$stateParams', '$location', 'UsersAdmin',
+	function($scope, $stateParams, $location, UsersAdmin) {
+		// Find existing User
+		this.findOne = function() {
+			$scope.user = UsersAdmin.get({
+				userId: $stateParams.userId
+			});
+		};
+
+		// Update existing User
+		this.update = function() {
+			var user = $scope.user;
+
+			user.$update(function() {
+				$location.path('admin/usercontrol' + user._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 	}
 ]);
 
