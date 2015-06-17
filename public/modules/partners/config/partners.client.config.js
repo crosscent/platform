@@ -4,8 +4,11 @@
 angular.module('partners').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Partners', 'partners', 'dropdown', '/partners(/create)?');
-		Menus.addSubMenuItem('topbar', 'partners', 'List Partners', 'partners');
-		Menus.addSubMenuItem('topbar', 'partners', 'New Partner', 'partners/create');
+		Menus.addMenuItem('topbar', 'Partners', 'partners');
+
+		// Set admin menu items
+		Menus.addMenuItem('admin', 'Partners', 'partners', 'dropdown', '/partners(/create)?');
+		Menus.addSubMenuItem('admin', 'partners', 'List Partners', 'partners');
+		Menus.addSubMenuItem('admin', 'partners', 'New Partner', 'partners/create');
 	}
 ]);

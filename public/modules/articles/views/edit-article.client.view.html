@@ -1,0 +1,27 @@
+<section data-ng-controller="ArticlesEditController as articleEditCtrl" data-ng-init="articleEditCtrl.findOne()">
+    <div class="page-header">
+        <h1>Edit Article</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="articleEditCtrl.update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="article.name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                    <label class="control-label" for="name">Content</label>
+                    <div class="controls">
+                        <textarea type="text" data-ng-model="article.content" id="content" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

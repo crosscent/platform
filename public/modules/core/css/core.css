@@ -1,9 +1,11 @@
 html{
 	font-size: 100%;
+	background-color: #F5F5F5;
 }
 body{
-	font-family: 'Gentium Book Basic', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 100%;
+	background-color: #F5F5F5 !important;
 }
 
 .undecorated-link:hover {
@@ -21,60 +23,77 @@ body{
 .vertical-center {
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
 }
 
 
 .brand-name {
 	text-align: center;
+	padding-top: 0.9em;
 }
 .brand-name a {
 	color: black;
 	font-family: 'Playfair Display', serif;
-	font-weight: 700;
 	font-style: italic;
-	font-size: 3em;
+	font-size: 2em;
+	text-decoration: none;
 }
 .brand-name:hover{
 	text-decoration: none;
 }
 .navbar {
+	padding-bottom: 1em;
+	border-bottom: 1px #DCDCDC solid;
 	margin-bottom: 5px;
 }
 .navbar-nav > li > a {
 	color: #5c5c5c;
-	padding: 2em 3em 0 2em;
+	padding: 2em 1em 0 2em;
 	text-align: center;
+	text-transform: uppercase;
+	font-weight: 300;
+}
+
+.navbar-nav .active a	 {
+	color: #FF5252;
 }
 
 .nav > li > a:hover,
 .nav > li > a:focus {
-	background-color: #fff;
+	background-color: #F5F5F5;
 }
 .section1 {
 	overflow: hidden;
 }
 .intro {
-	background: url("/modules/core/img/intro.jpg");
+	background: url("//crosscent.s3.amazonaws.com/taipei101.jpg") no-repeat center center;
 	height: 500px;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .hand-picked {
-	background-color: #d0d0d0;
+	background-color: #F5F5F5;
 	height: 400px;
 }
-.hand-picked > .vertical-center > .bold {
+.hand-picked .bold {
 	font-weight: 700;
 	font-size: 1.5em;
 }
-.hand-picked > .vertical-center > .important {
+.hand-picked .important {
 	font-weight: 700;
 	font-family: 'Playfair Display', serif;
 	font-style: italic;
-	color: #fff;
+	color: #B71C1C;
 	font-size: 3em;
 }
-.hand-picked > .vertical-center > .italics {
+.hand-picked .italics {
 	font-style: italic;
 	font-size: 1em;
 	font-weight: 700;
@@ -83,7 +102,7 @@ body{
 	text-align: center;
 }
 .newcollection {
-	background-color: #ef3733;
+	background-color: #B71C1C;
 	height: 100px;
 }
 .newcollection p {
@@ -179,7 +198,7 @@ body{
 }
 
 .subscription {
-	background-color: #efeeee;
+	background-color: #fff;
 	margin-bottom: 0;
 }
 

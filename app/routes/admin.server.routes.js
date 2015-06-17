@@ -6,11 +6,11 @@ module.exports = function(app) {
   var admin = require('../../app/controllers/admin.server.controller');
 
 	app.route('/admin/usercontrol')
-		.get(users.requiresLogin, admin.userList);
+		.get(users.requiresLogin, users.hasAuthorization(['admin']), admin.userList);
 
 	app.route('/admin/usercontrol/:userId')
-		.get(admin.userRead)
-		.put(users.requiresLogin, admin.userUpdate);
+		.get(admin.userRead, users.hasAuthorization(['admin']))
+		.put(users.requiresLogin, users.hasAuthorization(['admin']), admin.userUpdate);
 
 	// Finish by binding the User middleware
 	app.param('userId', admin.userByID);
