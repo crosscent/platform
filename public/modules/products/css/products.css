@@ -20,3 +20,66 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+/*articles-view css*/
+.product-view .container-fluid {
+  padding: 0;
+}
+.product-view .horizontalScroll {
+	width: 100%; /* arbitary for demo only */
+  height: 350px;
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+.product-view .header {
+  height: 350px;
+  width: auto;
+  border-image-width: 0;
+}
+.product-view .left, .product-view .right {
+  padding-top: 1.5em;
+}
+.product-view .left .category {
+  color: #c2a878;
+  font-weight: 700;
+  margin: 0;
+}
+.product-view .left .title {
+  margin: 0;
+}
+.product-view .left .description {
+  margin-top: 2em;
+}
+.product-view .right .spec h2, .product-view .right .price h2 {
+  color: #999999;
+  font-weight: 700;
+  font-size: 1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+.product-view .right .price p {
+  color: #999999;
+  font-size: 0.8em;
+}
+.product-view .right .spec p {
+  color: #c2a878;
+  font-size: 0.8em;
+}
+.product-view .right .border {
+  border-bottom: 1px solid #DCDCDC;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+}
+.product-view .social-media .row {
+  padding-bottom: 0.5em;
+}
+.product-view .sm-icon {
+  height: 25px;
+}
+.product-view .sm-link {
+  color: #999999;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}

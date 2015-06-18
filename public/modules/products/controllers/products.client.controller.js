@@ -29,7 +29,8 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 		this.create = function() {
 			// Create new Product object
 			var product = new Products ({
-				name: $scope.name
+				name: $scope.name,
+				category: $scope.categoryId
 			});
 
 			// Redirect after save
@@ -45,12 +46,15 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 	}
 ]);
 
-productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products',
-	function($scope, $stateParams, $location, Products) {
+productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories',
+	function($scope, $stateParams, $location, Products, Categories) {
 		// Find a list of Products
 		this.find = function() {
 			$scope.products = Products.query();
 		};
+
+		// Find a list of categories
+		this.categories = Categories.query();
 
 		// Find existing Product
 		this.findOne = function() {

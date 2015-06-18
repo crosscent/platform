@@ -11,3 +11,10 @@ angular.module('categories').factory('Categories', ['$resource',
 		});
 	}
 ]);
+//Categories service used to communicate Categories REST endpoints
+angular.module('categories').factory('ProductsList', ['$resource',
+	function($resource) {
+		return $resource('categories/:categoryId/list', { categoryId: '@_id'
+		});
+	}
+]);

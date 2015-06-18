@@ -23,6 +23,10 @@
                           <p>spec3</a>
                         </div>
                       </div>
+                      <div>
+                        <p>Categories</p>
+                        <select data-ng-model="product.category" data-ng-options="category._id as category.name for category in ProductEditCtrl.categories" id="category" class="form-control"></select>
+                      </div>
                     </div>
                   </div>
                 </div>

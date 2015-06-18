@@ -1,3 +1,7 @@
+.articles-view {
+  padding-bottom: 2em;
+}
+
 .articles-view .container-fluid {
   padding: 0;
 }

@@ -95,7 +95,7 @@ partnersApp.controller('PartnersEditController', ['$scope', '$stateParams', 'Par
 		this.toggleAnimation = function () {
 			$scope.animationsEnabled = !$scope.animationsEnabled;
 		};
-		
+
 		// Update existing Partner
 		this.update = function(updatedCustomer) {
 			var partner = updatedCustomer;
@@ -113,6 +113,8 @@ partnersApp.controller('PartnersEditController', ['$scope', '$stateParams', 'Par
 				partnerId: $stateParams.partnerId
 			});
 		};
+
+
 	}
 ]);
 

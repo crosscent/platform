@@ -35,6 +35,10 @@ var ProductSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	category: {
+		type: Schema.ObjectId,
+		ref: 'Category'
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
