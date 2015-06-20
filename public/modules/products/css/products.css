@@ -51,6 +51,7 @@
   bottom:0;
   width: 100%;
   display: inline-block;
+  background-color: #000;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 600;
   padding: 0.5em;

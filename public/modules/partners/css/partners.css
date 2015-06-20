@@ -83,11 +83,60 @@
   background-size: cover;
 }
 .partner-view .name {
-  margin-top: 2em;
+  margin: 2em 0 2em 0;
 }
 .partner-view .left {
   text-align: right;
 }
 .partner-view .logo{
   height: 60px;
+}
+.partner-view .title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.partner-view .wrapper {
+  margin: 5px;
+  background: #dddddd;
+}
+.partner-view .image {
+  height: 250px;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.partner-view .image:hover .hover {
+  display: block;
+}
+.partner-view .hover {
+  display: none;
+  background: #c2a878;
+  height: 250px;
+}
+.partner-view .wrapper a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+}
+.partner-view .spec .spec-title {
+  text-align: center;
+  font-weight: 300;
+  padding-bottom: 5px;
+  position: relative;
+}
+.partner-view .spec .spec-title:before {
+  content: "";
+  position: absolute;
+  width: 25%;
+  height: 1px;
+  bottom: 0;
+  left: 37.5%;
+  border-bottom: 1px solid gray;
+}
+.partner-view .spec .spec-descript {
+  text-align: center;
+  font-size: 0.8em;
 }
