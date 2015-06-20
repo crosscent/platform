@@ -140,3 +140,25 @@
   text-align: center;
   font-size: 0.8em;
 }
+
+/* partner-list css*/
+.partner-list .text {
+  width: 60%;
+}
+.partner-list .image {
+  width: 40%;
+}
+.partner-list .list-left .text {
+  float: left;
+}
+.partner-list .list-left .right {
+  float: right;
+}
+.partner-list .list-left {
+  padding: 1em 0 1em 3em;
+  text-align: left;
+}
+.partner-list .list-right {
+  padding: 1em 3em 1em 0;
+  text-align: right;
+}

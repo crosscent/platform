@@ -11,17 +11,3 @@ angular.module('products').factory('Products', ['$resource',
 		});
 	}
 ]);
-
-angular.module('products').factory('Categories', ['$resource',
-	function($resource) {
-		return $resource('categories/:categoryId', { categoryId: '@_id'
-		});
-	}
-]);
-
-angular.module('products').factory('Partners', ['$resource',
-	function($resource) {
-		return $resource('partners/:partnerId', { partnerId: '@_id'
-		});
-	}
-]);

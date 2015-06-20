@@ -3,18 +3,15 @@
 var partnersApp = angular.module('partners');
 
 // Partners controller
-partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authentication', 'Partners', 'ProductsList',
-	function($scope, $stateParams, Authentication, Partners, ProductsList) {
+partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authentication', 'Partners', 'ProductsListByPartner',
+	function($scope, $stateParams, Authentication, Partners, ProductsListByPartner) {
 
 		$scope.authentication = Authentication;
 
 		// Find a list of Partners
 		this.partners = Partners.query();
 
-		// Find a list of ProductsList
-		this.productsList = ProductsList.query({
-			partnerId: $stateParams.partnerId
-		});
+
 
 		// Find existing Partner
 		this.findOne = function() {
@@ -22,6 +19,10 @@ partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authent
 				partnerId: $stateParams.partnerId
 			});
 			$scope.slides = [1,2,3,4,5];
+			// Find a list of ProductsList
+			this.productsList = ProductsListByPartner.query({
+				partnerId: $stateParams.partnerId
+			});
 		};
 	}
 ]);

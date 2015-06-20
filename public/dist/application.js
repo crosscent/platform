@@ -231,6 +231,13 @@ articlesApp.controller('ArticlesEditController', ['$scope', '$stateParams', '$lo
 				});
 			}
 		};
+		
+		// Find existing Article
+		this.findOne = function() {
+			$scope.article = Articles.get({
+				articleId: $stateParams.articleId
+			});
+		};
 
 		// Update existing Article
 		this.update = function() {
@@ -242,12 +249,7 @@ articlesApp.controller('ArticlesEditController', ['$scope', '$stateParams', '$lo
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		// Find existing Article
-		this.findOne = function() {
-			$scope.article = Articles.get({
-				articleId: $stateParams.articleId
-			});
-		};
+
 	}
 ]);
 
@@ -394,8 +396,8 @@ angular.module('categories').config(['$stateProvider',
 var categoriesApp = angular.module('categories');
 
 // Categories controller
-categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Categories', 'ProductsList',
-	function($scope, $stateParams, Authentication, Categories, ProductsList){
+categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Categories', 'ProductsListByCat',
+	function($scope, $stateParams, Authentication, Categories, ProductsListByCat){
 
 		this.authentication = Authentication;
 
@@ -403,16 +405,16 @@ categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Aut
 
 		this.categories = Categories.query();
 
-		this.ProductsList = ProductsList.query({
-			categoryId: $stateParams.categoryId
-		});
+
 
 		// Find existing Category
 		this.findOne = function() {
 			$scope.category = Categories.get({
 				categoryId: $stateParams.categoryId
 			});
-
+			this.ProductsList = ProductsListByCat.query({
+				categoryId: $stateParams.categoryId
+			});
 		};
 	}
 ]);
@@ -535,7 +537,7 @@ angular.module('categories').factory('Categories', ['$resource',
 	}
 ]);
 //Categories service used to communicate Categories REST endpoints
-angular.module('categories').factory('ProductsList', ['$resource',
+angular.module('categories').factory('ProductsListByCat', ['$resource',
 	function($resource) {
 		return $resource('categories/:categoryId/list', { categoryId: '@_id'
 		});
@@ -806,18 +808,15 @@ angular.module('partners').config(['$stateProvider',
 var partnersApp = angular.module('partners');
 
 // Partners controller
-partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authentication', 'Partners', 'ProductsList',
-	function($scope, $stateParams, Authentication, Partners, ProductsList) {
+partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authentication', 'Partners', 'ProductsListByPartner',
+	function($scope, $stateParams, Authentication, Partners, ProductsListByPartner) {
 
 		$scope.authentication = Authentication;
 
 		// Find a list of Partners
 		this.partners = Partners.query();
 
-		// Find a list of ProductsList
-		this.productsList = ProductsList.query({
-			partnerId: $stateParams.partnerId
-		});
+
 
 		// Find existing Partner
 		this.findOne = function() {
@@ -825,6 +824,10 @@ partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authent
 				partnerId: $stateParams.partnerId
 			});
 			$scope.slides = [1,2,3,4,5];
+			// Find a list of ProductsList
+			this.productsList = ProductsListByPartner.query({
+				partnerId: $stateParams.partnerId
+			});
 		};
 	}
 ]);
@@ -1012,7 +1015,7 @@ angular.module('partners').factory('Partners', ['$resource',
 ]);
 
 //Partners service used to communicate Partners REST endpoints
-angular.module('partners').factory('ProductsList', ['$resource',
+angular.module('partners').factory('ProductsListByPartner', ['$resource',
 	function($resource) {
 		return $resource('partners/:partnerId/list', { partnerId: '@_id'
 		});
@@ -1264,20 +1267,6 @@ angular.module('products').factory('Products', ['$resource',
 			update: {
 				method: 'PUT'
 			}
-		});
-	}
-]);
-
-angular.module('products').factory('Categories', ['$resource',
-	function($resource) {
-		return $resource('categories/:categoryId', { categoryId: '@_id'
-		});
-	}
-]);
-
-angular.module('products').factory('Partners', ['$resource',
-	function($resource) {
-		return $resource('partners/:partnerId', { partnerId: '@_id'
 		});
 	}
 ]);

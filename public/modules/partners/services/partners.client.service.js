@@ -13,7 +13,7 @@ angular.module('partners').factory('Partners', ['$resource',
 ]);
 
 //Partners service used to communicate Partners REST endpoints
-angular.module('partners').factory('ProductsList', ['$resource',
+angular.module('partners').factory('ProductsListByPartner', ['$resource',
 	function($resource) {
 		return $resource('partners/:partnerId/list', { partnerId: '@_id'
 		});

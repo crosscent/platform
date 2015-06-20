@@ -1,19 +1,19 @@
 <section data-ng-controller="PartnersController as partnersCtrl">
-    <div class="page-header">
-        <h1>Partners</h1>
+  <div class="partner-list">
+    <div class="container-fluid">
+      <h1>Partners</h1>
+      <div class="row" ng-class-odd="'list-left'" ng-class-even="'list-right'"data-ng-repeat="partner in partnersCtrl.partners">
+        <a href="/#!/partners/{{partner._id}}"><h1 data-ng-bind="partner.name"></h1></a>
+        <div class="text">
+          <p data-ng-bind="partner.longDescription"></p>
+        </div>
+        <div class="image">
+        </div>
+      </div>
+
+      <div class="alert alert-warning text-center" data-ng-hide="!partners.$resolved || partners.length">
+      	No Partners yet, why don't you <a href="/#!/partners/create">create one</a>?
+      </div>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="partner in partnersCtrl.partners" href="/#!/partners/{{partner._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="partner.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="partner.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="partner.name"></h4>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!partners.$resolved || partners.length">
-    	No Partners yet, why don't you <a href="/#!/partners/create">create one</a>?
-    </div>
+  </div>
 </section>

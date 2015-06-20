@@ -40,6 +40,13 @@ articlesApp.controller('ArticlesEditController', ['$scope', '$stateParams', '$lo
 				});
 			}
 		};
+		
+		// Find existing Article
+		this.findOne = function() {
+			$scope.article = Articles.get({
+				articleId: $stateParams.articleId
+			});
+		};
 
 		// Update existing Article
 		this.update = function() {
@@ -51,12 +58,7 @@ articlesApp.controller('ArticlesEditController', ['$scope', '$stateParams', '$lo
 				$scope.error = errorResponse.data.message;
 			});
 		};
-		// Find existing Article
-		this.findOne = function() {
-			$scope.article = Articles.get({
-				articleId: $stateParams.articleId
-			});
-		};
+
 	}
 ]);
 

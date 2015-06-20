@@ -3,8 +3,8 @@
 var categoriesApp = angular.module('categories');
 
 // Categories controller
-categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Categories', 'ProductsList',
-	function($scope, $stateParams, Authentication, Categories, ProductsList){
+categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Authentication', 'Categories', 'ProductsListByCat',
+	function($scope, $stateParams, Authentication, Categories, ProductsListByCat){
 
 		this.authentication = Authentication;
 
@@ -12,16 +12,16 @@ categoriesApp.controller('CategoriesController', ['$scope', '$stateParams', 'Aut
 
 		this.categories = Categories.query();
 
-		this.ProductsList = ProductsList.query({
-			categoryId: $stateParams.categoryId
-		});
+
 
 		// Find existing Category
 		this.findOne = function() {
 			$scope.category = Categories.get({
 				categoryId: $stateParams.categoryId
 			});
-
+			this.ProductsList = ProductsListByCat.query({
+				categoryId: $stateParams.categoryId
+			});
 		};
 	}
 ]);
