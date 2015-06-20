@@ -1,19 +1,24 @@
 <section data-ng-controller="ProductsController as ProductCtrl" data-ng-init="ProductCtrl.find()">
-    <div class="page-header">
-        <h1>Products</h1>
-    </div>
-    <div class="list-group">
-        <a data-ng-repeat="product in products" data-ng-href="#!/products/{{product._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="product.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="product.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="product.name"></h4>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!products.$resolved || products.length">
-    	No Products yet, why don't you <a href="/#!/products/create">create one</a>?
+    <div class="product-list">
+      <div class="container">
+        <div class="list-group">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 item-list" data-ng-repeat="product in products">
+              <div class="wrapper">
+                <a data-ng-href="#!/products/{{product.name}}">
+                  <div class="image" ng-style="{'background-image':'url({{product.images.1.link}})'}" >
+                    <div class="hover">
+                      <p class="title vertical-center" data-ng-bind="product.name"></p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning text-center" data-ng-hide="!products.$resolved || products.length">
+        	No Products yet, why don't you <a href="/#!/products/create">create one</a>?
+        </div>
+      </div>
     </div>
 </section>

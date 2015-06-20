@@ -812,13 +812,7 @@ partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authent
 		this.authentication = Authentication;
 
 		// Find a list of Partners
-
 		this.partners = Partners.query();
-
-
-
-
-
 	}
 ]);
 
@@ -1031,7 +1025,7 @@ angular.module('products').config(['$stateProvider',
 			templateUrl: 'modules/products/views/create-product.client.view.html'
 		}).
 		state('viewProduct', {
-			url: '/products/:productId',
+			url: '/products/:productName',
 			templateUrl: 'modules/products/views/view-product.client.view.html'
 		}).
 		state('editProduct', {
@@ -1040,6 +1034,7 @@ angular.module('products').config(['$stateProvider',
 		});
 	}
 ]);
+
 'use strict';
 
 var productsApp = angular.module('products');
@@ -1057,7 +1052,7 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', 'Authent
 		// Find existing Product
 		this.findOne = function() {
 			$scope.product = Products.get({
-				productId: $stateParams.productId
+				productName: $stateParams.productName
 			});
 		};
 	}
@@ -1088,8 +1083,8 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 	}
 ]);
 
-productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories',
-	function($scope, $stateParams, $location, Products, Categories) {
+productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories', '$modal', '$log',
+	function($scope, $stateParams, $location, Products, Categories, $modal, $log) {
 		// Find a list of Products
 		this.find = function() {
 			$scope.products = Products.query();
@@ -1116,6 +1111,58 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$lo
 			});
 		};
 
+		// Add a new spec
+		this.addSpec = function() {
+			var product = $scope.product;
+
+			product.specification.push({title: 'enter new spec', descript: 'enter descript'});
+		};
+
+		// Delete spec
+		this.deleteSpec = function(index) {
+			var product = $scope.product;
+			product.specification.splice(index, 1);
+		};
+
+		// Add a new image
+		this.addImage = function() {
+			var product = $scope.product;
+
+			product.images.push({link: 'enter link', descript: 'enter descript'});
+		};
+
+		// Delete spec
+		this.deleteImage = function(index) {
+			var product = $scope.product;
+			product.images.splice(index, 1);
+		};
+		// Open a modal window to Update a single partner record
+		this.specUpdate = function (size, selectedProduct) {
+
+			var modalInstance = $modal.open({
+				animation: $scope.animationsEnabled,
+				templateUrl: 'modules/products/views/spec-update.client.view.html',
+				controller: ["$scope", "$modalInstance", "product", function ($scope, $modalInstance, product) {
+					$scope.product = product;
+				}],
+				size: size,
+				resolve: {
+					product: function () {
+						return selectedProduct;
+					}
+				}
+			});
+
+			modalInstance.result.then(function (selectedItem) {
+				$scope.selected = selectedItem;
+			}, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+		};
+
+		this.toggleAnimation = function () {
+			$scope.animationsEnabled = !$scope.animationsEnabled;
+		};
 	}
 ]);
 //
@@ -1184,7 +1231,7 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$lo
 //Products service used to communicate Products REST endpoints
 angular.module('products').factory('Products', ['$resource',
 	function($resource) {
-		return $resource('products/:productId', { productId: '@_id'
+		return $resource('products/:productName', { productName: '@_Name'
 		}, {
 			update: {
 				method: 'PUT'

@@ -9,13 +9,7 @@ partnersApp.controller('PartnersController', ['$scope', '$stateParams', 'Authent
 		this.authentication = Authentication;
 
 		// Find a list of Partners
-
 		this.partners = Partners.query();
-
-
-
-
-
 	}
 ]);
 

@@ -2,7 +2,12 @@
 	<div class="product-view">
 		<div class="container-fluid">
 			<div class="horizontalScroll">
-				<img class="header" alt="" src="http://www.gettyimages.co.uk/gi-resources/images/Homepage/Category-Creative/UK/UK_Creative_462809583.jpg"><img class="header" alt="" src="http://blog.jimdo.com/wp-content/uploads/2014/01/tree-247122.jpg"><img class="header" alt="" src="http://blogs.biomedcentral.com/on-biology/wp-content/uploads/sites/5/2014/02/Benjamin-Blonder.png"><img class="header" alt="" src="http://www.gettyimages.in/CMS/StaticContent/1391099215267_hero2.jpg">
+				<div class="wrapper" data-ng-repeat="image in product.images" >
+					<img class="header" data-ng-src="{{image.link}}">
+					<div class="overlay">
+						<p data-ng-bind="image.descript"></p>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="container">
@@ -16,9 +21,9 @@
 					<div class="row spec border">
 						<div class="col-xs-12">
 							<h2>Details</h2>
-							<p>Material: Canvas with Italian leather detailing</p>
-							<p>Colour: Olive brown</p>
-							<p>Made in: Italy</p>
+							<div data-ng-repeat="spec in product.specification">
+									<p data-ng-bind="spec.title + ': ' + spec.descript"></p>
+							</div>
 						</div>
 					</div>
 					<div class="row price border">

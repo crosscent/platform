@@ -16,21 +16,20 @@ var ProductSchema = new Schema({
 		required: 'Please fill Product name',
 		trim: true
 	},
-	images: {
-		type: Array,
-		default: [{title:'specialization1', icon: 'glyphicon-asterisk', descript: 'short descript'},],
-		trim: true
-	},
+	images: [{
+		link:String,
+		descript:String
+	}],
 	description: {
 		type: String,
 		default: '',
 		trim: true
 	},
-	specification: {
-		type: Array,
-		default: [{title:'specialization1', icon: 'glyphicon-asterisk', descript: 'short descript'}, {title:'specialization1', icon: 'glyphicon-asterisk', descript: 'short descript'}, {title:'specialization1', icon: 'glyphicon-asterisk', descript: 'short descript'}],
-		trim: true
-	},
+	specification: [{
+		title:String,
+		icon:String,
+		descript:String
+	}],
 	created: {
 		type: Date,
 		default: Date.now
