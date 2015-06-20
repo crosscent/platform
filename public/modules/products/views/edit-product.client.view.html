@@ -19,7 +19,11 @@
                         </div>
                         <div class="row">
                           <label>product category</label>
-                          <select data-ng-model="product.category" data-ng-options="category._id as category.name for category in ProductEditCtrl.categories" id="category" class="form-control"></select>
+                          <select data-ng-init="product.category.name" data-ng-model="product.category" data-ng-options="category._id as category.name for category in ProductEditCtrl.categories" id="category" class="form-control"></select>
+                        </div>
+                        <div class="row">
+                          <label>product partner</label>
+                          <select data-ng-model="product.partner" data-ng-options="partner._id as partner.name for partner in ProductEditCtrl.partners" id="partner" class="form-control"></select>
                         </div>
                         <div class="row">
                           <label>product specifications</label>

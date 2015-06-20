@@ -87,15 +87,14 @@ exports.list = function(req, res) {
 /**
  * Product middleware
  */
-exports.productByName = function(req, res, next, name) {
-	Product.findOne({'name': name}).populate('user', 'displayName').populate('category', 'name').exec(function(err, product) {
+exports.productByID = function(req, res, next, id) {
+	Product.findById(id).populate('user', 'displayName').populate('category', 'name').exec(function(err, product) {
 		if (err) return next(err);
-		if (! product) return next(new Error('Failed to load Product ' + name));
+		if (! product) return next(new Error('Failed to load Product ' + id));
 		req.product = product ;
 		next();
 	});
 };
-
 /**
  * Product authorization middleware
  */

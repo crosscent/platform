@@ -9,11 +9,11 @@ module.exports = function(app) {
 		.get(products.list)
 		.post(users.requiresLogin, products.create);
 
-	app.route('/products/:productName')
+	app.route('/products/:productId')
 		.get(products.read)
 		.put(users.requiresLogin, products.hasAuthorization, products.update)
 		.delete(users.requiresLogin, products.hasAuthorization, products.delete);
 
 	// Finish by binding the Product middleware
-	app.param('productName', products.productByName);
+	app.param('productId', products.productByID);
 };

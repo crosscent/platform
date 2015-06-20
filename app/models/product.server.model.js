@@ -38,6 +38,10 @@ var ProductSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'Category'
 	},
+	partner:{
+		type: Schema.ObjectId,
+		ref: 'Partner'
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

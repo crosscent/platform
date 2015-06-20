@@ -26,6 +26,11 @@ var PartnerSchema = new Schema({
 		default: '',
 		trim: true
 	},
+	longDescription: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	communication: {
 		type: String,
 		default: '',
@@ -51,11 +56,9 @@ var PartnerSchema = new Schema({
 		default: '',
 		trim: true
 	},
-	header: {
-		type: String,
-		default: '',
-		trim: true
-	},
+	header: [{
+		link: String
+	}],
 	thumbnail: {
 		type: String,
 		default: '',

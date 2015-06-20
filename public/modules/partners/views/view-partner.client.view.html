@@ -1,21 +1,53 @@
-<section data-ng-controller="PartnersController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="partner.name"></h1>
+<section data-ng-controller="PartnersController as PartnerCtrl" data-ng-init="PartnerCtrl.findOne()">
+	<div class="partner-view">
+		<div class="carousel">
+			<carousel interval="myInterval" disable-animation="true">
+				<slide ng-repeat="slide in partner.header" active="slide.active">
+					<div class="slider" ng-style="{'background-image':'url({{slide.link}})'}">
+						<div class="carousel-caption">
+						</div>
+					</div>
+				</slide>
+			</carousel>
+		</div>
+		<div class="container">
+			<div class="row name">
+				<div class="col-xs-12 col-sm-offset-3 col-sm-9">
+					<h1 data-ng-bind="partner.name"></h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-3 left">
+					<p data-ng-show="partner.country" data-ng-bind="partner.country"></p>
+					<p data-ng-show="partner.city" data-ng-bind="partner.city"></p>
+					<img class="responsive logo" data-ng-show="partner.logo" data-ng-src="{{partner.logo}}">
+				</div>
+				<div class="col-xs-12 col-sm-9">
+					<p data-ng-bind="partner.longDescription"></p>
+				</div>
+			</div>
+			<div class="row">
+				<h1 class="title">Products Made and Designed by This Partner</h1>
+				<div data-ng-repeat="product in PartnerCtrl.productsList" class="col-sm-4">
+					<p data-ng-bind="product.name"></p>
+				</div>
+			</div>
+			<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == partner.user._id))">
+				<a class="btn btn-primary" href="/#!/partners/{{partner._id}}/edit">
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>
+				<a class="btn btn-primary" data-ng-click="remove();">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</div>
+			<small>
+				<em class="text-muted">
+					Posted on
+					<span data-ng-bind="partner.created | date:'mediumDate'"></span>
+					by
+					<span data-ng-bind="partner.user.displayName"></span>
+				</em>
+			</small>
+		</div>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == partner.user._id))">
-		<a class="btn btn-primary" href="/#!/partners/{{partner._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="partner.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="partner.user.displayName"></span>
-		</em>
-	</small>
 </section>

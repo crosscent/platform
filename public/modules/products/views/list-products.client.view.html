@@ -5,7 +5,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-6 item-list" data-ng-repeat="product in products">
               <div class="wrapper">
-                <a data-ng-href="#!/products/{{product.name}}">
+                <a data-ng-href="#!/products/{{product._id}}">
                   <div class="image" ng-style="{'background-image':'url({{product.images.1.link}})'}" >
                     <div class="hover">
                       <p class="title vertical-center" data-ng-bind="product.name"></p>

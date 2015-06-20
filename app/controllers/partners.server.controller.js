@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Partner = mongoose.model('Partner'),
+	Product = mongoose.model('Product'),
 	_ = require('lodash');
 
 /**
@@ -72,7 +73,7 @@ exports.delete = function(req, res) {
 /**
  * List of Partners
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
 	Partner.find().sort('-created').populate('user', 'displayName').exec(function(err, partners) {
 		if (err) {
 			return res.status(400).send({
@@ -87,7 +88,7 @@ exports.list = function(req, res) {
 /**
  * Partner middleware
  */
-exports.partnerByID = function(req, res, next, id) { 
+exports.partnerByID = function(req, res, next, id) {
 	Partner.findById(id).populate('user', 'displayName').exec(function(err, partner) {
 		if (err) return next(err);
 		if (! partner) return next(new Error('Failed to load Partner ' + id));
@@ -104,4 +105,19 @@ exports.hasAuthorization = function(req, res, next) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
+};
+
+/**
+ * Product List middleware
+ */
+exports.productByPartner = function(req, res) {
+	Product.where('partner', req.partner).exec(function(err, product) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(product);
+		}
+	});
 };

@@ -2,51 +2,66 @@
     <div class="page-header">
         <h1>Edit Your Information</h1>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal partner-edit" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <div class="controls">
-                      <div class="container-fluid">
-                        <div class="row">
-                          <a ng-click="partnerEditCtrl.logoUpdate('sm', partner)">
-                            <img class="logo responsive" ng-src="{{ partner.logo || 'http://www.clker.com/cliparts/U/d/f/Q/F/x/trialog-logo-luebeck-blank-hi.png'}}">
-                          </a>
-                        </div>
-                        <div class="row">
-                          <input type="text" data-ng-model="partner.name" ng-blur="partnerEditCtrl.update(partner)" id="name" class="form-control storename" placeholder="Name" required>
-                        </div>
-                        <div class="row">
-                          <input type="text" data-ng-model="partner.slogan" ng-blur="partnerEditCtrl.update(partner)" id="slogan" class="form-control slogan" placeholder="Slogan">
-                        </div>
-                        <div class="row">
-                          <div class="header" ng-style="{'background-image': 'url(' + partner.header + ')'}">
-                            <p class="vcenter">
-                              <a ng-click="partnerEditCtrl.headerUpdate('sm', partner)">click here to change header</a>
-                            </p>
-                          </div>
-                        </div>
+    <form class="form-horizontal partner-edit" data-ng-submit="partnerEditCtrl.update()" novalidate>
+        <fieldset>
+            <div class="form-group">
+              <div class="controls">
+                <div class="container-fluid">
+                  <div class="row">
+                    <a ng-click="partnerEditCtrl.logoUpdate('sm', partner)">
+                      <img class="logo responsive" ng-src="{{ partner.logo || 'http://www.clker.com/cliparts/U/d/f/Q/F/x/trialog-logo-luebeck-blank-hi.png'}}">
+                    </a>
+                  </div>
+                  <div class="row">
+                    <input type="text" data-ng-model="partner.name" id="name" class="form-control storename" placeholder="Name" required>
+                  </div>
+                  <div class="row">
+                    <input type="text" data-ng-model="partner.slogan" id="slogan" class="form-control slogan" placeholder="Slogan">
+                  </div>
+                  <div class="row">
+                    <p>Enter a long description here</p>
+                    <textarea type="text" data-ng-model="partner.longDescription" id="longDescription" class="form-control" placeholder="Long Description"></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p>Header Images</p>
+                      <p><a ng-click="partnerEditCtrl.addHeader()">add</a></p>
+                      <div data-ng-repeat="image in partner.header" class="col-sm-4">
+                        <input type="text" data-ng-model="image.link" id="link" class="form-control name" placeholder="link">
+                        <p><a ng-click="partnerEditCtrl.deleteHeader($index)">delete</a></p>
                       </div>
-                        <p class="special text-center">our specializations<p>
-                          <div class="col-xs-12 col-sm-4" ng-repeat="spec in partner.specialization">
-                            <div class="row">
-                              <span class="glyphicon spec-icon" ng-class="spec.icon" aria-hidden="true"></span>
-                              <input type="text" data-ng-model="spec.icon" ng-blur="partnerEditCtrl.update(partner)" id="spec.icon" class="form-control">
-                            </div>
-                            <div class="row">
-                              <input type="text" data-ng-model="spec.title" ng-blur="partnerEditCtrl.update(partner)" id="spec.title" class="form-control spec-title">
-                              <textarea  data-ng-model="spec.descript" ng-blur="partnerEditCtrl.update(partner)" id="spec.descript" class="form-control spec-descript"></textarea>
-                            </div>
-                          </div>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p>City</p>
+                      <input type="text" data-ng-model="partner.city" id="city" class="form-control" placeholder="City">
+                    </div>
+                    <div class="col-sm-6">
+                      <p>Country</p>
+                      <input type="text" data-ng-model="partner.country" id="country" class="form-control" placeholder="Country">
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                <p class="special text-center">our specializations<p>
+                <div class="col-xs-12 col-sm-4" ng-repeat="spec in partner.specialization">
+                  <div class="row">
+                    <span class="glyphicon spec-icon" ng-class="spec.icon" aria-hidden="true"></span>
+                    <input type="text" data-ng-model="spec.icon" ng-blur="partnerEditCtrl.update(partner)" id="spec.icon" class="form-control">
+                  </div>
+                  <div class="row">
+                    <input type="text" data-ng-model="spec.title" ng-blur="partnerEditCtrl.update(partner)" id="spec.title" class="form-control spec-title">
+                    <textarea  data-ng-model="spec.descript" ng-blur="partnerEditCtrl.update(partner)" id="spec.descript" class="form-control spec-descript"></textarea>
+                  </div>
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
-    </div>
+              </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-default">
+            </div>
+    				<div data-ng-show="error" class="text-danger">
+    					<strong data-ng-bind="error"></strong>
+    				</div>
+        </fieldset>
+    </form>
 </section>

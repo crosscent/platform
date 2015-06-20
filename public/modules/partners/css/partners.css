@@ -69,3 +69,25 @@
   height: 10em;
   text-align: center;
 }
+
+/* partner-view css*/
+.partner-view .carousel {
+  display:block;
+}
+.partner-view .carousel .slider {
+  height: 400px;
+  background: no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.partner-view .name {
+  margin-top: 2em;
+}
+.partner-view .left {
+  text-align: right;
+}
+.partner-view .logo{
+  height: 60px;
+}

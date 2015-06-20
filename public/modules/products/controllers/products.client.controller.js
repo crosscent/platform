@@ -15,7 +15,7 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', 'Authent
 		// Find existing Product
 		this.findOne = function() {
 			$scope.product = Products.get({
-				productName: $stateParams.productName
+				productId: $stateParams.productId
 			});
 		};
 	}
@@ -46,8 +46,8 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 	}
 ]);
 
-productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories', '$modal', '$log',
-	function($scope, $stateParams, $location, Products, Categories, $modal, $log) {
+productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log',
+	function($scope, $stateParams, $location, Products, Categories, Partners, $modal, $log) {
 		// Find a list of Products
 		this.find = function() {
 			$scope.products = Products.query();
@@ -55,6 +55,9 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$lo
 
 		// Find a list of categories
 		this.categories = Categories.query();
+
+		// Find a list of partners
+		this.partners = Partners.query();
 
 		// Find existing Product
 		this.findOne = function() {
@@ -94,7 +97,7 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$lo
 			product.images.push({link: 'enter link', descript: 'enter descript'});
 		};
 
-		// Delete spec
+		// Delete image
 		this.deleteImage = function(index) {
 			var product = $scope.product;
 			product.images.splice(index, 1);
