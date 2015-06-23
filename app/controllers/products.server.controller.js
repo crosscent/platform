@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Product middleware
  */
 exports.productByID = function(req, res, next, id) {
-	Product.findById(id).populate('user', 'displayName').populate('category', 'name').exec(function(err, product) {
+	Product.findById(id).populate('user', 'displayName').populate('category', 'name').populate('partner', 'name').exec(function(err, product) {
 		if (err) return next(err);
 		if (! product) return next(new Error('Failed to load Product ' + id));
 		req.product = product ;

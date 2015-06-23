@@ -142,17 +142,30 @@
 }
 
 /* partner-list css*/
-.partner-list .text {
-  width: 60%;
+.partner-list .list-left a,
+.partner-list .list-right a {
+  color: #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0 15px 0 15px;
 }
-.partner-list .image {
-  width: 40%;
+.partner-list .image img {
+  width: 200px;
+  display: block;
+  margin: auto;
 }
 .partner-list .list-left .text {
   float: left;
 }
-.partner-list .list-left .right {
+.partner-list .list-left .image {
   float: right;
+}
+.partner-list .list-right .text {
+  float: right;
+}
+.partner-list .list-right .image {
+  float:left;
 }
 .partner-list .list-left {
   padding: 1em 0 1em 3em;

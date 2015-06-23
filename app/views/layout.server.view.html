@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>{{title}}</title>
+	<title>{{title}}{{subtitle}}</title>
 
 	<!-- General META -->
 	<meta charset="utf-8">
@@ -21,14 +21,14 @@
 	<meta property="og:site_name" content="{{title}}">
 	<meta property="og:title" content="{{title}}">
 	<meta property="og:description" content="{{description}}">
-	<meta property="og:url" content="{{url}}">
+	<meta property="og:url" data-ng-bind="url">
 	<meta property="og:image" content="/img/brand/logo.png">
 	<meta property="og:type" content="website">
 
 	<!-- Twitter META -->
 	<meta name="twitter:title" content="{{title}}">
 	<meta name="twitter:description" content="{{description}}">
-	<meta name="twitter:url" content="{{url}}">
+	<meta name="twitter:url" data-ng-bind="url">
 	<meta name="twitter:image" content="/img/brand/logo.png">
 
 	<!-- Custom Fonts -->
@@ -37,6 +37,7 @@
 	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Ovo' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'>
 	<!-- Fav Icon -->
 	<link href="//crosscent.s3.amazonaws.com/logo.ico" rel="shortcut icon" type="image/x-icon">
 

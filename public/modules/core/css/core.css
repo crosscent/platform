@@ -3,7 +3,7 @@ html{
 	background-color: #fafafb;
 }
 body{
-	font-family: 'Muli', sans-serif;
+	font-family: 'Neuton', serif;
 	font-size: 100%;
 	background-color: #fafafb !important;
 }
@@ -70,7 +70,7 @@ h1 {
 
 .nav > li > a:hover,
 .nav > li > a:focus {
-	background-color: #F5F5F5;
+	background-color: #FFF;
 }
 .section1 {
 	overflow: hidden;

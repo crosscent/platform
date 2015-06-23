@@ -3,9 +3,10 @@
 var productsApp = angular.module('products');
 
 // Products controller
-productsApp.controller('ProductsController', ['$scope', '$stateParams', 'Authentication', 'Products',
-	function($scope, $stateParams, Authentication, Products) {
+productsApp.controller('ProductsController', ['$scope', '$stateParams', '$rootScope', 'Authentication', 'Products', 'Partners',
+	function($scope, $stateParams, $rootScope, Authentication, Products, Partners) {
 		$scope.authentication = Authentication;
+
 
 		// Find a list of Products
 		this.find = function() {
@@ -14,8 +15,10 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', 'Authent
 
 		// Find existing Product
 		this.findOne = function() {
-			$scope.product = Products.get({
-				productId: $stateParams.productId
+			Products.get({productId: $stateParams.productId
+			}).$promise.then(function(product){
+				$scope.product = product;
+				$rootScope.subtitle = product.name;
 			});
 		};
 	}
@@ -46,8 +49,8 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 	}
 ]);
 
-productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log',
-	function($scope, $stateParams, $location, Products, Categories, Partners, $modal, $log) {
+productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$rootScope', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log',
+	function($scope, $stateParams, $rootScope, $location, Products, Categories, Partners, $modal, $log) {
 		// Find a list of Products
 		this.find = function() {
 			$scope.products = Products.query();
@@ -64,6 +67,7 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$lo
 			$scope.product = Products.get({
 				productId: $stateParams.productId
 			});
+			$rootScope.subtitle = $scope.product.name;
 		};
 
 		// Update existing Product

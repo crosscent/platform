@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-8 col-xs-12 left">
-					<p class="category"data-ng-bind="product.category.name"></p><span data-ng-bind="product.user.displayName"></span>
+					<p class="category"data-ng-bind="product.category.name"></p><span data-ng-bind="product.partner.name"></span>
 					<h1 class="title" data-ng-bind="product.name"></h1>
 					<p class="description" data-ng-bind="product.description"></p>
 				</div>
@@ -37,7 +37,7 @@
 							<p class="bold">Share</p>
 							<div class="row">
 								<div class="col-xs-2"><img class="responsive sm-icon" src="//crosscent.s3.amazonaws.com/twitter-icon.png"></div>
-								<div class="col-xs-10"><a class="sm-link" href="#">Twitter</a></div>
+								<div class="col-xs-10"><a class="twitter-share-button" data-ng-href="https://twitter.com/intent/tweet?text=+{{url}}">Tweet</a></div>
 							</div>
 							<div class="row">
 								<div class="col-xs-2"><img class="responsive sm-icon" src="//crosscent.s3.amazonaws.com/twitter-icon.png"></div>
@@ -65,13 +65,5 @@
 				</a>
 			</div>
 		</div>
-		<small>
-			<em class="text-muted">
-				Posted on
-				<span data-ng-bind="product.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="product.user.displayName"></span>
-			</em>
-		</small>
 	</div>
 </section>
