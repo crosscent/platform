@@ -41,6 +41,7 @@ angular.element(document).ready(function() {
 	//Then init the app
 	angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
+
 'use strict';
 
 // Use application configuration module to register a new module
@@ -562,12 +563,18 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 ]);
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
-	function($scope, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$rootScope', '$window', 'Authentication', 'Menus',
+	function($scope, $rootScope, $window, Authentication, Menus) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
 		$scope.adminMenu = Menus.getMenu('admin');
+		$rootScope.url = $window.location.href;
+		$rootScope.$on('$stateChangeStart',
+			function(event, toState, toParams, fromState, fromParams){
+				$rootScope.url = $window.location.href;
+			});
+
 
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
@@ -594,6 +601,29 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 angular.module('core').controller('TabsCtrl', ["$scope", "$window", function ($scope, $window) {
 
 }]);
+
+'use strict';
+
+angular.module('core').directive('updateUrl', ['$rootScope', '$timeout',
+  function($rootScope, $timeout) {
+    return {
+      link: function(scope, element) {
+
+        var listener = function(event, toState) {
+
+          var url = 'Default Url';
+          if (toState.data && toState.data.url) url = toState.data.url;
+
+          $timeout(function() {
+            element.text(url);
+          }, 0, false);
+        };
+
+        $rootScope.$on('$stateChangeSuccess', listener);
+      }
+    };
+  }
+]);
 
 'use strict';
 
@@ -1046,7 +1076,7 @@ angular.module('products').config(['$stateProvider',
 		$stateProvider.
 		state('listProducts', {
 			url: '/products',
-			templateUrl: 'modules/products/views/list-products.client.view.html'
+			templateUrl: 'modules/products/views/list-products.client.view.html',
 		}).
 		state('createProduct', {
 			url: '/products/create',
@@ -1068,9 +1098,10 @@ angular.module('products').config(['$stateProvider',
 var productsApp = angular.module('products');
 
 // Products controller
-productsApp.controller('ProductsController', ['$scope', '$stateParams', 'Authentication', 'Products',
-	function($scope, $stateParams, Authentication, Products) {
+productsApp.controller('ProductsController', ['$scope', '$stateParams', '$rootScope', 'Authentication', 'Products', 'Partners',
+	function($scope, $stateParams, $rootScope, Authentication, Products, Partners) {
 		$scope.authentication = Authentication;
+
 
 		// Find a list of Products
 		this.find = function() {
@@ -1079,8 +1110,10 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', 'Authent
 
 		// Find existing Product
 		this.findOne = function() {
-			$scope.product = Products.get({
-				productId: $stateParams.productId
+			Products.get({productId: $stateParams.productId
+			}).$promise.then(function(product){
+				$scope.product = product;
+				$rootScope.subtitle = product.name;
 			});
 		};
 	}
@@ -1111,8 +1144,8 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 	}
 ]);
 
-productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log',
-	function($scope, $stateParams, $location, Products, Categories, Partners, $modal, $log) {
+productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$rootScope', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log',
+	function($scope, $stateParams, $rootScope, $location, Products, Categories, Partners, $modal, $log) {
 		// Find a list of Products
 		this.find = function() {
 			$scope.products = Products.query();
@@ -1129,6 +1162,7 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$lo
 			$scope.product = Products.get({
 				productId: $stateParams.productId
 			});
+			$rootScope.subtitle = $scope.product.name;
 		};
 
 		// Update existing Product
