@@ -70,6 +70,11 @@ ApplicationConfiguration.registerModule('partners');
 ApplicationConfiguration.registerModule('products');
 'use strict';
 
+// Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('statics');
+
+'use strict';
+
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
 'use strict';
@@ -157,7 +162,7 @@ angular.module('admin').factory('UsersAdmin', ['$resource',
 angular.module('articles').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Articles', 'articles', 'item', '/articles(?:/[^/]+)?');
+		Menus.addMenuItem('topbar', 'Articles', 'articles', 'item', '/articles(?:/[^/]+)?', null, null, 7);
 
 		// Set admin menu items
 		Menus.addMenuItem('admin', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
@@ -359,7 +364,7 @@ angular.module('articles').factory('Articles', ['$resource',
 angular.module('categories').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?');
+		// Menus.addMenuItem('topbar', 'Categories', 'categories', 'item', '/categories(?:/[^/]+)?', null, null, 9);
 
 		// Set admin menu items
 		Menus.addMenuItem('admin', 'Categories', 'categories', 'dropdown', '/categories(/create)?');
@@ -827,7 +832,7 @@ angular.module('core').service('Menus', [
 angular.module('partners').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Partners', 'partners');
+		Menus.addMenuItem('topbar', 'Partners', 'partners', 'item', '/partners(?:/[^/]+)?', null, null, 6);
 
 		// Set admin menu items
 		Menus.addMenuItem('admin', 'Partners', 'partners', 'dropdown', '/partners(/create)?');
@@ -1086,7 +1091,7 @@ angular.module('partners').factory('ProductsListByPartner', ['$resource',
 angular.module('products').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Products', 'products', 'item', '/products(?:/[^/]+)?');
+		Menus.addMenuItem('topbar', 'Products', 'products', 'item', '/products(?:/[^/]+)?', null, null, 8);
 
 		// Set admin menu items
 		Menus.addMenuItem('admin', 'Products', 'products', 'dropdown', '/products(/create)?');
@@ -1343,6 +1348,42 @@ angular.module('products').factory('Products', ['$resource',
 	}
 ]);
 
+'use strict';
+
+//Setting up route
+angular.module('statics').config(['$stateProvider',
+	function($stateProvider) {
+		// Statics state routing
+		$stateProvider.
+		state('statics', {
+			url: '/about',
+			templateUrl: 'modules/statics/views/statics.client.view.html',
+			data: {
+				pageTitle: 'About Us'
+			}
+		});
+	}
+]);
+
+'use strict';
+
+// Configuring the Articles module
+angular.module('statics').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'About Us', 'aboutus', 'item', '/aboutus(?:/[^/]+)?', null, null, 0);
+    Menus.addMenuItem('topbar', 'Contact', 'contact', 'item', '/contact(?:/[^/]+)?', null, null, 10);
+	}
+]);
+
+'use strict';
+
+angular.module('statics').controller('StaticsController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
 'use strict';
 
 // Config HTTP Error Handling

@@ -4,7 +4,7 @@
 angular.module('products').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Products', 'products', 'item', '/products(?:/[^/]+)?');
+		Menus.addMenuItem('topbar', 'Products', 'products', 'item', '/products(?:/[^/]+)?', null, null, 8);
 
 		// Set admin menu items
 		Menus.addMenuItem('admin', 'Products', 'products', 'dropdown', '/products(/create)?');

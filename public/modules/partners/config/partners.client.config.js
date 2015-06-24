@@ -4,7 +4,7 @@
 angular.module('partners').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Partners', 'partners');
+		Menus.addMenuItem('topbar', 'Partners', 'partners', 'item', '/partners(?:/[^/]+)?', null, null, 6);
 
 		// Set admin menu items
 		Menus.addMenuItem('admin', 'Partners', 'partners', 'dropdown', '/partners(/create)?');
