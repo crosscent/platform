@@ -8,8 +8,8 @@ angular.module('core').directive('updateTitle', ['$rootScope', '$timeout',
         var listener = function(event, toState) {
 
           var title = 'Sense Forage';
-          console.log($rootScope);
           if (toState.data && toState.data.pageTitle) title = title + ' - ' + toState.data.pageTitle;
+          console.log(toState);
 
           $timeout(function() {
             element.text(title);
