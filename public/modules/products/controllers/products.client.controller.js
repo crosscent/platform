@@ -15,7 +15,7 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', '$rootSc
 
 		// Find existing Product
 		this.findOne = function() {
-			Products.get({productId: $stateParams.productId
+			Products.getBySlug({slug: $stateParams.productSlug
 			}).$promise.then(function(product){
 				$scope.product = product;
 			});
@@ -23,8 +23,8 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', '$rootSc
 	}
 ]);
 
-productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Authentication', 'Products',
-	function($scope, $location, Authentication, Products) {
+productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Authentication', 'Products', 'Slug',
+	function($scope, $location, Authentication, Products, Slug) {
 		this.authentication = Authentication;
 
 		// Create new Product
@@ -32,12 +32,13 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 			// Create new Product object
 			var product = new Products ({
 				name: $scope.name,
-				category: $scope.categoryId
+				category: $scope.categoryId,
+				slug: Slug.slugify($scope.name)
 			});
 
 			// Redirect after save
 			product.$save(function(response) {
-				$location.path('products/' + response._id);
+				$location.path('products/item/' + response.slug);
 
 				// Clear form fields
 				$scope.name = '';
@@ -48,8 +49,8 @@ productsApp.controller('ProductsCreateController', ['$scope', '$location', 'Auth
 	}
 ]);
 
-productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$rootScope', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log',
-	function($scope, $stateParams, $rootScope, $location, Products, Categories, Partners, $modal, $log) {
+productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$rootScope', '$location', 'Products', 'Categories', 'Partners', '$modal', '$log', 'Slug',
+	function($scope, $stateParams, $rootScope, $location, Products, Categories, Partners, $modal, $log, Slug) {
 		// Find a list of Products
 		this.find = function() {
 			$scope.products = Products.query();
@@ -66,15 +67,14 @@ productsApp.controller('ProductsEditController', ['$scope', '$stateParams', '$ro
 			$scope.product = Products.get({
 				productId: $stateParams.productId
 			});
-			$rootScope.subtitle = $scope.product.name;
 		};
 
 		// Update existing Product
 		this.update = function() {
 			var product = $scope.product;
-
+			product.slug = Slug.slugify(product.name);
 			product.$update(function() {
-				$location.path('products/' + product._id);
+				$location.path('products/item/' + product.slug);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

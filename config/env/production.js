@@ -18,7 +18,8 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-				'public/lib/angular-social/angular-social.js'
+				'public/lib/angular-social/angular-social.js',
+				'public/lib/angular-slugify/angular-slugify.js'
 			]
 		},
 		css: 'public/dist/application.min.css',

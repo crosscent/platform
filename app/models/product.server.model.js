@@ -45,6 +45,13 @@ var ProductSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	slug: {
+		type: String,
+		default: '',
+		trim: true,
+		unique: true,
+		required: 'Slug cannot be blank'
 	}
 });
 

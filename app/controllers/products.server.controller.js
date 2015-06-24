@@ -104,3 +104,17 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+/**
+ * Product slug middleware
+ */
+exports.productBySlug = function(req, res) {
+	Product.findOne(req.query).populate('user', 'displayName').populate('category', 'name').populate('partner', 'name').exec(function(err, product) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(product);
+		}
+	});
+};

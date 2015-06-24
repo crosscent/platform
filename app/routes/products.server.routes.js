@@ -4,6 +4,9 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var products = require('../../app/controllers/products.server.controller');
 
+	app.route('/products/read-slug')
+		.get(products.productBySlug);
+		
 	// Products Routes
 	app.route('/products')
 		.get(products.list)
@@ -13,6 +16,8 @@ module.exports = function(app) {
 		.get(products.read)
 		.put(users.requiresLogin, products.hasAuthorization, products.update)
 		.delete(users.requiresLogin, products.hasAuthorization, products.delete);
+
+
 
 	// Finish by binding the Product middleware
 	app.param('productId', products.productByID);
