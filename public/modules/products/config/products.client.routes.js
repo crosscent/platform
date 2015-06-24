@@ -8,6 +8,9 @@ angular.module('products').config(['$stateProvider',
 		state('listProducts', {
 			url: '/products',
 			templateUrl: 'modules/products/views/list-products.client.view.html',
+			data: {
+				pageTitle: 'Product Listing'
+			}
 		}).
 		state('createProduct', {
 			url: '/products/create',

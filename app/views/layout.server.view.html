@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>{{title}}{{subtitle}}</title>
+	<title update-title></title>
 
 	<!-- General META -->
 	<meta charset="utf-8">
@@ -19,7 +19,7 @@
 	<!-- Facebook META -->
 	<meta property="fb:app_id" content="{{facebookAppId}}">
 	<meta property="og:site_name" content="{{title}}">
-	<meta property="og:title" content="{{title}}">
+	<meta property="og:title" data-ng-bind="subtitle">
 	<meta property="og:description" content="{{description}}">
 	<meta property="og:url" data-ng-bind="url">
 	<meta property="og:image" content="/img/brand/logo.png">

@@ -18,7 +18,6 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', '$rootSc
 			Products.get({productId: $stateParams.productId
 			}).$promise.then(function(product){
 				$scope.product = product;
-				$rootScope.subtitle = product.name;
 			});
 		};
 	}

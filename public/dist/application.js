@@ -605,6 +605,30 @@ angular.module('core').controller('TabsCtrl', ["$scope", "$window", function ($s
 
 'use strict';
 
+angular.module('core').directive('updateTitle', ['$rootScope', '$timeout',
+  function($rootScope, $timeout) {
+    return {
+      link: function(scope, element) {
+
+        var listener = function(event, toState) {
+
+          var title = 'Sense Forage';
+          console.log($rootScope);
+          if (toState.data && toState.data.pageTitle) title = title + ' - ' + toState.data.pageTitle;
+
+          $timeout(function() {
+            element.text(title);
+          }, 0, false);
+        };
+
+        $rootScope.$on('$stateChangeSuccess', listener);
+      }
+    };
+  }
+]);
+
+'use strict';
+
 angular.module('core').directive('updateUrl', ['$rootScope', '$timeout',
   function($rootScope, $timeout) {
     return {
@@ -1078,6 +1102,9 @@ angular.module('products').config(['$stateProvider',
 		state('listProducts', {
 			url: '/products',
 			templateUrl: 'modules/products/views/list-products.client.view.html',
+			data: {
+				pageTitle: 'Product Listing'
+			}
 		}).
 		state('createProduct', {
 			url: '/products/create',
@@ -1114,7 +1141,6 @@ productsApp.controller('ProductsController', ['$scope', '$stateParams', '$rootSc
 			Products.get({productId: $stateParams.productId
 			}).$promise.then(function(product){
 				$scope.product = product;
-				$rootScope.subtitle = product.name;
 			});
 		};
 	}
