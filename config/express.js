@@ -46,6 +46,10 @@ module.exports = function(db) {
 		next();
 	});
 
+	// Set up Prerender.IO
+	app.use(require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN));
+
+
 	// Should be placed before express.static
 	app.use(compress({
 		filter: function(req, res) {
