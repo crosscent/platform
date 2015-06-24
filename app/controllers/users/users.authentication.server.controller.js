@@ -24,7 +24,7 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 
-	// Then save the user 
+	// Then save the user
 	user.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -51,6 +51,29 @@ exports.signup = function(req, res) {
  */
 exports.signin = function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
+		if (err || !user) {
+			res.status(400).send(info);
+		} else {
+			// Remove sensitive data before login
+			user.password = undefined;
+			user.salt = undefined;
+
+			req.login(user, function(err) {
+				if (err) {
+					res.status(400).send(err);
+				} else {
+					res.json(user);
+				}
+			});
+		}
+	})(req, res, next);
+};
+
+/**
+ * Signin after basic authentication
+ */
+exports.signinBasic = function(req, res, next) {
+	passport.authenticate('basic', function(err, user, info) {
 		if (err || !user) {
 			res.status(400).send(info);
 		} else {
