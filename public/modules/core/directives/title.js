@@ -5,11 +5,14 @@ angular.module('core').directive('updateTitle', ['$rootScope', '$timeout',
     return {
       link: function(scope, element) {
 
-        var listener = function(event, toState) {
+        var listener = function(event, toState, $stateParams) {
 
           var title = 'Sense Forage';
           if (toState.data && toState.data.pageTitle) title = title + ' - ' + toState.data.pageTitle;
-          console.log(toState);
+          if ($stateParams.productSlug) {
+            var subtitle = $stateParams.productSlug.split('-').join(' ');
+            title = title + ' - ' + subtitle;
+            }
 
           $timeout(function() {
             element.text(title);
