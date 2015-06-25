@@ -238,7 +238,7 @@ articlesApp.controller('ArticlesEditController', ['$scope', '$stateParams', '$lo
 				});
 			}
 		};
-		
+
 		// Find existing Article
 		this.findOne = function() {
 			$scope.article = Articles.get({
@@ -255,6 +255,17 @@ articlesApp.controller('ArticlesEditController', ['$scope', '$stateParams', '$lo
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+		};
+
+		// Image controls
+		this.addImage = function() {
+			var article = $scope.article;
+
+			article.images.push({link: 'enter link', descript: 'enter descript'});
+		};
+		this.deleteImage = function(index) {
+			var article = $scope.article;
+			article.images.splice(index, 1);
 		};
 
 	}

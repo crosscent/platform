@@ -6,14 +6,41 @@
         <form class="form-horizontal" data-ng-submit="articleEditCtrl.update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="article.name" id="name" class="form-control" placeholder="Name" required>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label class="control-label" for="name">Name</label>
+                      <div class="controls">
+                          <input type="text" data-ng-model="article.name" id="name" class="form-control" placeholder="Name" required>
+                      </div>
                     </div>
-                    <label class="control-label" for="name">Content</label>
-                    <div class="controls">
-                        <textarea type="text" data-ng-model="article.content" id="content" class="form-control" placeholder="Content"></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label class="control-label" for="name">Excerpt</label>
+                      <div class="controls">
+                          <textarea type="text" data-ng-model="article.excerpt" id="excerpt" class="form-control" placeholder="Excerpt"></textarea>
+                      </div>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label class="control-label" for="name">Content</label>
+                      <div class="controls">
+                          <textarea type="text" data-ng-model="article.content" id="content" class="form-control" placeholder="Content"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label>product images</label>
+                      <p><a ng-click="articleEditCtrl.addImage()">add</a></p>
+                      <div data-ng-repeat="image in article.images" class="col-sm-4">
+                        <input type="text" data-ng-model="image.link" id="link" class="form-control name" placeholder="Link">
+                        <input type="text" data-ng-model="image.descript" id="descript" class="form-control name" placeholder="Descript">
+                        <p><a ng-click="articleEditCtrl.deleteImage($index)">delete</a></p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">

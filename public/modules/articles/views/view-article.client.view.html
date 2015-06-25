@@ -1,8 +1,13 @@
 <section data-ng-controller="ArticlesController as articleCtrl" data-ng-init="articleCtrl.findOne()">
 	<div class="articles-view">
-		<div class="container-fluid">
+		<div class="container-fluid" data-ng-show="article.images">
 			<div class="horizontalScroll">
-				<img class="header" alt="" src="http://www.gettyimages.co.uk/gi-resources/images/Homepage/Category-Creative/UK/UK_Creative_462809583.jpg"><img class="header" alt="" src="http://blog.jimdo.com/wp-content/uploads/2014/01/tree-247122.jpg"><img class="header" alt="" src="http://blogs.biomedcentral.com/on-biology/wp-content/uploads/sites/5/2014/02/Benjamin-Blonder.png"><img class="header" alt="" src="http://www.gettyimages.in/CMS/StaticContent/1391099215267_hero2.jpg">
+				<div class="wrapper" data-ng-repeat="image in article.images" >
+					<img class="header" data-ng-src="{{image.link}}">
+					<div class="overlay">
+						<p data-ng-bind="image.descript"></p>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="container">
@@ -19,7 +24,7 @@
 				<div class="row border">
 					<div class="col-xs-12">
 						<p class="bold">Excerpt</p>
-						<p class="excerpt">It might be a panda en route to a zoo or cashmere jumpers heading for Beijing or Boston. But regardless of value there is a good chance it is going to be shipped through Hong Kong International Airport’s cargo hub.</p>
+						<p class="excerpt" data-ng-bind="article.excerpt"></p>
 					</div>
 				</div>
 				<div class="row social-media">

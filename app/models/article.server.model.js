@@ -16,6 +16,13 @@ var ArticleSchema = new Schema({
 		required: 'Please fill Article name',
 		trim: true
 	},
+	images: [{
+		link:String,
+		descript:String
+	}],
+	excerpt: {
+		type: String
+	},
 	content: {
 		type: String,
 		default: '',
@@ -25,9 +32,13 @@ var ArticleSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	category: {
+		type: Schema.ObjectId,
+		ref: 'Category'
+	},
 	partner: {
 		type: Schema.ObjectId,
-		ref: 'User'
+		ref: 'Partner'
 	},
 	created: {
 		type: Date,
