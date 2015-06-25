@@ -1,14 +1,14 @@
 <section data-ng-controller="PartnersController as partnersCtrl">
   <div class="partner-list">
     <div class="container-fluid">
-      <h1>Partners</h1>
-      <div class="row" ng-class-odd="'list-left'" ng-class-even="'list-right'"data-ng-repeat="partner in partnersCtrl.partners">
+      <h1 class="header">Our Collaborating Partners</h1>
+      <div class="row" ng-class-odd="'list-left'" ng-class-even="'list-right'" data-ng-repeat="partner in partnersCtrl.partners">
         <h1><a class="title" href="/#!/partners/{{partner._id}}" data-ng-bind="partner.name"></a></h1>
         <div class="text col-xs-12 col-sm-8">
           <p data-ng-bind="partner.longDescription"></p>
         </div>
         <div class="image col-xs-12 col-sm-4">
-          <img class="responsive" data-ng-src="{{partner.logo}}">
+          <a href="/#!/partners/{{partner._id}}"><img class="responsive" data-ng-src="{{partner.logo}}"></a>
         </div>
       </div>
 

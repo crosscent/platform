@@ -30,14 +30,14 @@
 				<h1 class="title">Specializations</h1>
 				<div class="col-xs-12 col-sm-4" data-ng-repeat="spec in partner.specialization">
 					<p class="spec-title" data-ng-bind="spec.title"></p>
-					<p class="spec-descript" data-ng-bind="spec.descript"></p> 
+					<p class="spec-descript" data-ng-bind="spec.descript"></p>
 				</div>
 			</div>
 			<div class="row name">
 				<h1 class="title">Products Made and Designed by This Partner</h1>
 				<div class="col-xs-12 col-sm-6 item-list" data-ng-repeat="product in PartnerCtrl.productsList">
 					<div class="wrapper">
-						<a data-ng-href="#!/products/{{product._id}}">
+						<a data-ng-href="#!/products/item/{{product.slug}}">
 							<div class="image" ng-style="{'background-image':'url({{product.images.1.link}})'}" >
 								<div class="hover">
 									<p class="title vertical-center" data-ng-bind="product.name"></p>
