@@ -12,3 +12,30 @@
 	right: 10px;
 	position: absolute;
 }
+
+.user .header {
+	text-align: center;
+}
+
+.user .wrapper {
+	padding: 1em;
+	border: 1px solid gray;
+}
+.user .border {
+	margin-bottom: 1em;
+}
+.user .wrapper .inner {
+	padding: 1em;
+}
+.user .wrapper .inner .form-group {
+	margin: 0;
+}
+
+.user .wrapper .inner .title {
+	font-size: 1.5em;
+	font-weight: 700;
+}
+.user .forgot-password a {
+	color: black;
+	text-decoration: underline;
+}
