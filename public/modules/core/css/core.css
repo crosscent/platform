@@ -83,7 +83,7 @@ h1 {
 	overflow: hidden;
 }
 .intro {
-	background: url("//crosscent.s3.amazonaws.com/taipei101.jpg") no-repeat center center;
+	background: url("//fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xaf1/t31.0-8/11357160_913902285328718_548430142063631208_o.jpg") no-repeat center center;
 	height: 500px;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -110,7 +110,7 @@ h1 {
 	font-style: italic;
 	font-size: 1em;
 	font-weight: 700;
-	width: 100px;
+	width: 110px;
 	margin: auto;
 	text-align: center;
 }
